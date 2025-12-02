@@ -1,0 +1,17 @@
+[workspace]
+members = [
+    "support/advent",
+    "support/advent_macro",
+    "support/parse",
+    "support/parse_macro",
+]
+resolver = "2"
+
+[workspace.dependencies]
+advent = { path = "support/advent" }
+advent_macro = { path = "support/advent_macro" }
+combine = "4.6.7"
+derive_more = { version = "1", features = ["debug", "display"] }
+parse = { path = "support/parse" }
+parse_macro = { path = "support/parse_macro" }
+strum = { version = "0.26", features = ["derive"] }
