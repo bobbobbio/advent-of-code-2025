@@ -3,6 +3,7 @@ members = [
     "five",
     "four",
     "one",
+    "six",
     "support/advent",
     "support/advent_macro",
     "support/parse",

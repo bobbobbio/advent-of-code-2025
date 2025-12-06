@@ -1150,6 +1150,17 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0fda2ff0d084019ba4d7c6f371c95d8fd75ce3524c3cb8fb653a3023f6323e64"
 
 [[package]]
+name = "six"
+version = "0.1.0"
+dependencies = [
+ "advent",
+ "combine",
+ "derive_more",
+ "parse",
+ "strum",
+]
+
+[[package]]
 name = "slab"
 version = "0.4.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
