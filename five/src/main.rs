@@ -72,4 +72,4 @@ fn part_two(input: Input) -> u64 {
     total
 }
 
-harness!();
+harness!(part_1: 712, part_2: 332998283036769);
