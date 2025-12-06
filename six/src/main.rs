@@ -1,38 +1,10 @@
 use advent::prelude::*;
 
-#[derive(Debug)]
-struct InputLine(Vec<u64>);
-
-impl HasParser for InputLine {
-    #[into_parser]
-    fn parser() -> _ {
-        (
-            many(token(' ')).map(|_: String| ()),
-            many1(u64::parser().skip(many(token(' ')).map(|_: String| ()))),
-        )
-            .map(|(_, v)| Self(v))
-    }
-}
-
-#[derive(Debug)]
-struct OperatorLine(Vec<Operator>);
-
-impl HasParser for OperatorLine {
-    #[into_parser]
-    fn parser() -> _ {
-        (
-            many(token(' ')).map(|_: String| ()),
-            many1(Operator::parser().skip(many(token(' ')).map(|_: String| ()))),
-        )
-            .map(|(_, v)| Self(v))
-    }
-}
-
 #[derive(HasParser, Debug)]
 #[parse(sep_by = "")]
 struct Input {
-    inputs: List<InputLine, TermWith<NewLine>>,
-    operators: OperatorLine,
+    inputs: List<List<u64, SurroundedBy<Spaces>>, TermWith<NewLine>>,
+    operators: List<Operator, SurroundedBy<Spaces>>,
 }
 
 #[derive(HasParser, Debug, Clone, Copy)]
@@ -62,12 +34,12 @@ impl Operator {
 #[part_one]
 fn part_one(input: Input) -> u64 {
     let mut total = 0;
-    let width = input.inputs.iter().map(|i| i.0.len()).max().unwrap();
+    let width = input.inputs.iter().map(|i| i.len()).max().unwrap();
     for i in 0..width {
-        let operator = input.operators.0[i];
+        let operator = input.operators[i];
         let mut line_total = operator.initial();
         for line in &input.inputs {
-            line_total = operator.apply(line.0[i], line_total);
+            line_total = operator.apply(line[i], line_total);
         }
         total += line_total;
     }
